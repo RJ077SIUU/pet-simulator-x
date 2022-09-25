@@ -1,0 +1,22 @@
+if not game:IsLoaded() then
+game.Loaded:Wait()
+end
+local LoadValue = {}
+local network = require(game:GetService("ReplicatedStorage"):WaitForChild("Framework",10):WaitForChild("Library",10));
+assert(network,"questions")
+function LoadValue:getPath(...)--print(LoadValue:getPath("Variables","LoadingWorld"))
+    local path = {...}
+    local oldPath = network
+    for i,v in ipairs(path) do
+        oldPath = rawget(oldPath,v)
+    end
+    return oldPath
+end
+function LoadValue:waitForLoad()--this code is fucking abhorrent
+    local currentlyLoading
+        repeat wait()
+            currentlyLoading = ((LoadValue:getPath("Variables","LoadingWorld")==false) and workspace:FindFirstChild("__MAP") and workspace["__MAP"]:FindFirstChild("PlayerSpawns")) and true or false
+        until currentlyLoading
+    return currentlyLoading
+end
+return LoadValue
