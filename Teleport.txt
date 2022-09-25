@@ -1,4 +1,4 @@
-local PlaceID = game.PlaceId
+local PlaceID = 7722306047
 local AllIDs = {}
 local foundAnything = ""
 local actualHour = os.date("!*t").hour
